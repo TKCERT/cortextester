@@ -59,7 +59,7 @@ def build_inputdata(args):
 
     return args
 
-if __name__ == '__main__':
+def main():
     pipe.fix_encoding()
     if len(sys.argv) > 1:
         argparser = setup_argparser()
@@ -72,3 +72,6 @@ if __name__ == '__main__':
         jsonschema.validate(data, INPUT_SCHEMA)
         pprint.pprint(data)
         print("Everything ok, data validated successful!")
+
+if __name__ == '__main__':
+    main()
