@@ -47,3 +47,11 @@ For more information about the usage of `analyzer-input.py`, see:
 ```
 python analyzer-input.py --help
 ```
+
+## Roadmap
+
+Some ideas for the future development of cortextester:
+
+* Make the main programs of this tool installable to `PATH` or usable via `python -m`.
+* Create and validate JSON-input for Responders.
+* Validate the JSON-output of Responders.
