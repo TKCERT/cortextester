@@ -30,7 +30,7 @@ analyzer-input -t "domain" -v "thehive-project.org"
 
 Validate this JSON-input again if passed via piping:
 ```
-analyzer-input -t "domain" -v "thehive-project.org" | analyzer-output
+analyzer-input -t "domain" -v "thehive-project.org" | analyzer-input
 ```
 
 Pass this JSON-input to a Cortex-Analyzer for testing and development:
