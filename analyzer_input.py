@@ -13,7 +13,8 @@ import sys
 ALLOWED_PROXIES = ("http", "https")
 
 def setup_argparser():
-    argparser = argparse.ArgumentParser(description="Build Cortex-Analyzer input.")
+    argparser = argparse.ArgumentParser(description="""Create and verify Cortex-Analyzer input.
+        Pass JSON-input via stdin for verification with specifying any argument.""")
     argparser.add_argument("--dataType", "-t", required=True, help="Input data type")
     argparser.add_argument("--data", "-v", required=True, help="Input data value")
     argparser.add_argument("--tlp", "-l", type=int, choices=range(0, 4), help="Input data TLP level")
