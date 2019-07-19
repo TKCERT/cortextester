@@ -3,7 +3,7 @@
 
 INPUT_SCHEMA = {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://thehive-project.org/cortex/analyzer-input.schema.json",
+    "$id": "https://github.com/TKCERT/cortextester/analyzer-input.schema.json",
     "title": "Cortex-Analyzer Input",
     "description": "Input to a Cortex analyzer.",
     "type": "object",
@@ -13,6 +13,8 @@ INPUT_SCHEMA = {
                 "dataType": {
                     "description": "Input data type",
                     "type": "string",
+                    "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
+                             "other", "regexp", "registry", "uri_path", "url", "user-agent"],
                     "not": { "const": "file" }
                 },
                 "data": {
@@ -27,6 +29,8 @@ INPUT_SCHEMA = {
                 "dataType": {
                     "description": "Input data type",
                     "type": "string",
+                    "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
+                             "other", "regexp", "registry", "uri_path", "url", "user-agent"],
                     "const": "file"
                 },
                 "file": {
@@ -65,7 +69,7 @@ INPUT_SCHEMA = {
                 "max_tlp": {
                     "description": "Max allowed TLP level",
                     "type": "integer",
-                    "minimum": 0,
+                    "minimum": -1,
                     "maximum": 3
                 },
                 "check_pap": {
@@ -75,7 +79,7 @@ INPUT_SCHEMA = {
                 "max_pap": {
                     "description": "Max allowed PAP level",
                     "type": "integer",
-                    "minimum": 0,
+                    "minimum": -1,
                     "maximum": 3
                 },
                 "proxy": {
@@ -94,7 +98,7 @@ INPUT_SCHEMA = {
 
 OUTPUT_SCHEMA = {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "$id": "http://thehive-project.org/cortex/analyzer-output.schema.json",
+    "$id": "https://github.com/TKCERT/cortextester/analyzer-output.schema.json",
     "title": "Cortex-Analyzer Output",
     "description": "Output to a Cortex analyzer.",
     "type": "object",
@@ -105,10 +109,13 @@ OUTPUT_SCHEMA = {
                     "description": "Extracted artifacts",
                     "type": "array",
                     "items": {
+                        "type": "object",
                         "properties": {
                             "dataType": {
                                 "description": "Extracted data type",
                                 "type": "string",
+                                "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
+                                         "other", "regexp", "registry", "uri_path", "url", "user-agent"],
                                 "not": { "const": "file" }
                             },
                             "data": {
@@ -137,7 +144,8 @@ OUTPUT_SCHEMA = {
                                     "namespace": {"type": "string"},
                                     "predicate": {"type": "string"},
                                     "value": {"type": "string"}
-                                }
+                                },
+                                "required": ["level", "namespace", "predicate", "value"]
                             }
                         }
                     },
