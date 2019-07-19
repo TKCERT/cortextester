@@ -8,8 +8,9 @@ This set of Python tools can be used to create and validate the JSON-input passe
 
 * Python 3.6+
     * [jsonschema](https://github.com/Julian/jsonschema)
+    * [texttable](https://github.com/foutaise/texttable)
 
-Special thanks to this great [json-schema.org](https://json-schema.org/) validation library!
+Special thanks to the great [jsonschema](https://json-schema.org/) validation library!
 
 ## Usage
 
