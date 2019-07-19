@@ -37,13 +37,20 @@ setup(
         'analyzer_input',
         'analyzer_output',
         'analyzer',
-        'pipe'
+        'pipe',
+        'responder_config',
+        'responder_input',
+        'responder_output',
+        'responder',
     ],
     entry_points = {
         'console_scripts': [
             'analyzer-config=analyzer_config:main'
             'analyzer-input=analyzer_input:main',
-            'analyzer-output=analyzer_output:main'
+            'analyzer-output=analyzer_output:main',
+            'responder-config=responder_config:main'
+            'responder-input=responder_input:main',
+            'responder-output=responder_output:main',
         ]
     },
     install_requires=read_file('requirements.txt').splitlines(),
