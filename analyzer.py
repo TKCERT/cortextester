@@ -186,3 +186,92 @@ OUTPUT_SCHEMA = {
     },
     "required": ["success"]
 }
+
+CONFIG_SCHEMA = {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/TKCERT/cortextester/analyzer-config.schema.json",
+    "title": "Cortex-Analyzer Config",
+    "description": "Config to a Cortex analyzer.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "description": "Name of the analyzer",
+            "type": "string"
+        },
+        "version": {
+            "description": "Version of the analyzer",
+            "type": "string"
+        },
+        "author": {
+            "description": "Author of the analyzer",
+            "type": "string"
+        },
+        "url": {
+            "description": "URL to find the analyzer",
+            "type": "string"
+        },
+        "license": {
+            "description": "License of the analyzer",
+            "type": "string"
+        },
+        "description": {
+            "description": "Description of the analyzer",
+            "type": "string"
+        },
+        "dataTypeList": {
+            "description": "List of dataTypes the analyzer can handle",
+            "type": "array",
+            "items": {
+                "description": "Type of data the analyzer can handle",
+                "type": "string"
+            }
+        },
+        "command": {
+            "description": "Command to execute the analyzer",
+            "type": "string"
+        },
+        "baseConfig": {
+            "description": "Base configuration name of the analyzer",
+            "type": "string"
+        },
+        "config": {
+            "description": "Configuration of the analyzer",
+            "type": "object"
+        },
+        "configurationItems": {
+            "description": "Configuration items of the analyzer",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Name of the configuration item",
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Description of the configuration item",
+                        "type": "string"
+                    },
+                    "type": {
+                        "description": "Type of the configuration item value",
+                        "type": "string"
+                    },
+                    "multi": {
+                        "description": "Flag if the configuration item can have multiple values",
+                        "type": "boolean"
+                    },
+                    "required": {
+                        "description": "Flag if the configuration item is required",
+                        "type": "boolean"
+                    },
+                    "defaultValue": {
+                        "description": "Default value of the configuration item"
+                    },
+                },
+                "required": ["name", "description", "type", "multi", "required"]
+            }
+        }
+    },
+    "required": ["name", "version", "author", "url", "license", "description",
+                 "dataTypeList", "command", "baseConfig"]
+}

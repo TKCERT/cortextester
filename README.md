@@ -13,6 +13,11 @@ Special thanks to this great [json-schema.org](https://json-schema.org/) validat
 
 ## Usage
 
+Validate JSON-config related to a Cortex-Analyzer:
+```
+cat <your-json-config-file> | analyzer-config
+```
+
 Validate JSON-input passed to a Cortex-Analyzer:
 ```
 cat <your-json-input-file> | analyzer-input
@@ -43,9 +48,11 @@ Validate the whole process including a Cortex-Analyzer:
 analyzer-input -t "domain" -v "thehive-project.org" | <your-cortex-analyzer> | analyzer-output
 ```
 
-For more information about the usage of `analyzer-input`, see:
+For more information about the usage of the tools, see:
 ```
+analyzer-config --help
 analyzer-input --help
+analyzer-output --help
 ```
 
 ## Roadmap

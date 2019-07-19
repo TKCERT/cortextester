@@ -33,6 +33,7 @@ setup(
         'Topic :: Security',
         'Topic :: Software Development :: Libraries :: Python Modules'],
     py_modules=[
+        'analyzer_config',
         'analyzer_input',
         'analyzer_output',
         'analyzer',
@@ -40,6 +41,7 @@ setup(
     ],
     entry_points = {
         'console_scripts': [
+            'analyzer-config=analyzer_config:main'
             'analyzer-input=analyzer_input:main',
             'analyzer-output=analyzer_output:main'
         ]
