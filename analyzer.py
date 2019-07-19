@@ -14,7 +14,7 @@ INPUT_SCHEMA = {
                     "description": "Input data type",
                     "type": "string",
                     "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
-                             "other", "regexp", "registry", "uri_path", "url", "user-agent"],
+                             "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
                     "not": { "const": "file" }
                 },
                 "data": {
@@ -30,7 +30,7 @@ INPUT_SCHEMA = {
                     "description": "Input data type",
                     "type": "string",
                     "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
-                             "other", "regexp", "registry", "uri_path", "url", "user-agent"],
+                             "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
                     "const": "file"
                 },
                 "file": {
@@ -115,7 +115,7 @@ OUTPUT_SCHEMA = {
                                 "description": "Extracted data type",
                                 "type": "string",
                                 "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
-                                         "other", "regexp", "registry", "uri_path", "url", "user-agent"],
+                                         "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
                                 "not": { "const": "file" }
                             },
                             "data": {
@@ -225,7 +225,7 @@ CONFIG_SCHEMA = {
                 "description": "Type of data the analyzer can handle",
                 "type": "string",
                 "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
-                         "other", "regexp", "registry", "uri_path", "url", "user-agent"],
+                         "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
             }
         },
         "command": {
