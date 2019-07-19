@@ -13,6 +13,7 @@ import sys
 def setup_argparser():
     argparser = argparse.ArgumentParser(description="""Render and verify Cortex-Analyzer config.
         Pass JSON-config via stdin for verification.""")
+    argparser.add_argument("--all", "-A", action="store_true", help="Show all aspects")
     argparser.add_argument("--meta", "-m", action="store_true", help="Show meta data")
     argparser.add_argument("--config", "-c", action="store_true", help="Show configuration items")
     return argparser
@@ -36,13 +37,13 @@ def render_values(data):
     return data.values()
 
 def render_outputdata(data, args):
-    if args.get("meta", False):
+    if args.get("all", False) or args.get("meta", False):
         table = texttable.Texttable()
         table.header(("key", "value"))
         table.add_rows(render_items(data), header=False)
         print(table.draw())
 
-    if args.get("config", False):
+    if args.get("all", False) or args.get("config", False):
         configItems = data.get("configurationItems", [])
         if configItems:
             table = texttable.Texttable()

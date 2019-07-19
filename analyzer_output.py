@@ -12,6 +12,7 @@ import sys
 def setup_argparser():
     argparser = argparse.ArgumentParser(description="""Render and verify Cortex-Analyzer output.
         Pass JSON-output via stdin for verification.""")
+    argparser.add_argument("--all", "-A", action="store_true", help="Show all aspects")
     argparser.add_argument("--artifacts", "-a", action="store_true", help="Show job artifacts")
     argparser.add_argument("--taxonomies", "-t", action="store_true", help="Show job taxonomies")
     argparser.add_argument("--full", "-f", action="store_true", help="Show full job report")
@@ -24,7 +25,7 @@ def render_values(data):
     return data.values()
 
 def render_outputdata(data, args):
-    if args.get("artifacts", False):
+    if args.get("all", False) or args.get("artifacts", False):
         artifacts = data.get("artifacts", [])
         if artifacts:
             table = texttable.Texttable()
@@ -34,7 +35,7 @@ def render_outputdata(data, args):
         else:
             print("No artifacts available!")
 
-    if args.get("taxonomies", False):
+    if args.get("all", False) or args.get("taxonomies", False):
         summary = data.get("summary", {})
         taxonomies = summary.get("taxonomies", [])
         if taxonomies:
@@ -45,7 +46,7 @@ def render_outputdata(data, args):
         else:
             print("No taxonomies available!")
 
-    if args.get("full", False):
+    if args.get("all", False) or args.get("full", False):
         full = data.get("full", {})
         if full:
             pprint.pprint(full)
