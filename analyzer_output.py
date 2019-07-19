@@ -64,6 +64,12 @@ def main():
     else:
         pprint.pprint(data)
         print("Everything ok, data validated successful!")
+    if not data.get("success", False):
+        print("Job failed with error message: %s" % data.get("errorMessage", "n/a"))
+        sys.exit(1)
+    else:
+        print("Job completed successful!")
+        sys.exit(0)
 
 if __name__ == '__main__':
     main()

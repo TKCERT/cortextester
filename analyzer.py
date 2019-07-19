@@ -98,53 +98,83 @@ OUTPUT_SCHEMA = {
     "title": "Cortex-Analyzer Output",
     "description": "Output to a Cortex analyzer.",
     "type": "object",
-    "properties": {
-        "artifacts": {
-            "description": "Extracted artifacts",
-            "type": "array",
-            "items": {
-                "properties": {
-                    "dataType": {
-                        "description": "Extracted data type",
-                        "type": "string",
-                        "not": { "const": "file" }
-                    },
-                    "data": {
-                        "description": "Extracted data value",
-                        "type": "string"
-                    },
+    "oneOf": [
+        {
+            "properties": {
+                "artifacts": {
+                    "description": "Extracted artifacts",
+                    "type": "array",
+                    "items": {
+                        "properties": {
+                            "dataType": {
+                                "description": "Extracted data type",
+                                "type": "string",
+                                "not": { "const": "file" }
+                            },
+                            "data": {
+                                "description": "Extracted data value",
+                                "type": "string"
+                            },
+                        },
+                        "required": ["dataType", "data"]
+                    }
                 },
-                "required": ["dataType", "data"]
-            }
+                "full": {
+                    "description": "Full job report",
+                    "type": "object"
+                },
+                "summary": {
+                    "description": "Job summary",
+                    "type": "object",
+                    "properties": {
+                        "taxonomies": {
+                            "description": "Taxonomies",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "level": {"type": "string", "enum": ["info", "safe", "suspicious", "malicious"]},
+                                    "namespace": {"type": "string"},
+                                    "predicate": {"type": "string"},
+                                    "value": {"type": "string"}
+                                }
+                            }
+                        }
+                    },
+                    "required": ["taxonomies"]
+                },
+                "success": {
+                    "description": "Job result",
+                    "type": "boolean",
+                    "const": True
+                }
+            },
+            "required": ["artifacts", "full", "summary", "success"]
         },
-        "full": {
-            "description": "Full job report",
-            "type": "object"
-        },
+        {
+            "properties": {
+                "input": {
+                    "description": "Original job input",
+                    "type": "object"
+                },
+                "errorMessage": {
+                    "description": "Error message",
+                    "type": "string"
+                },
+                "success": {
+                    "description": "Job result",
+                    "type": "boolean",
+                    "const": False
+                }
+            },
+            "required": ["errorMessage", "success"]
+        }
+    ],
+    "properties": {
         "success": {
             "description": "Job result",
             "type": "boolean"
-        },
-        "summary": {
-            "description": "Job summary",
-            "type": "object",
-            "properties": {
-                "taxonomies": {
-                    "description": "Taxonomies",
-                    "type": "array",
-                    "items": {
-                        "type": "object",
-                        "properties": {
-                            "level": {"type": "string", "enum": ["info", "safe", "suspicious", "malicious"]},
-                            "namespace": {"type": "string"},
-                            "predicate": {"type": "string"},
-                            "value": {"type": "string"}
-                        }
-                    }
-                }
-            },
-            "required": ["taxonomies"]
         }
     },
-    "required": ["artifacts", "full", "success", "summary"]
+    "required": ["success"]
 }
