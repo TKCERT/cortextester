@@ -45,10 +45,10 @@ setup(
     ],
     entry_points = {
         'console_scripts': [
-            'analyzer-config=analyzer_config:main'
+            'analyzer-config=analyzer_config:main',
             'analyzer-input=analyzer_input:main',
             'analyzer-output=analyzer_output:main',
-            'responder-config=responder_config:main'
+            'responder-config=responder_config:main',
             'responder-input=responder_input:main',
             'responder-output=responder_output:main',
         ]
