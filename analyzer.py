@@ -223,7 +223,9 @@ CONFIG_SCHEMA = {
             "type": "array",
             "items": {
                 "description": "Type of data the analyzer can handle",
-                "type": "string"
+                "type": "string",
+                "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
+                         "other", "regexp", "registry", "uri_path", "url", "user-agent"],
             }
         },
         "command": {
@@ -254,7 +256,8 @@ CONFIG_SCHEMA = {
                     },
                     "type": {
                         "description": "Type of the configuration item value",
-                        "type": "string"
+                        "type": "string",
+                        "enum": ["text", "string", "number", "boolean"]
                     },
                     "multi": {
                         "description": "Flag if the configuration item can have multiple values",
