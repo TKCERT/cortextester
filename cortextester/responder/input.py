@@ -1,22 +1,22 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from analyzer import INPUT_SCHEMA
+from cortextester.responder.schema import INPUT_SCHEMA
+from cortextester import pipe
 import jsonschema
 import argparse
 import os.path
 import pprint
-import pipe
 import json
 import sys
 
 ALLOWED_PROXIES = ("http", "https")
 
 def setup_argparser():
-    argparser = argparse.ArgumentParser(description="""Create and verify Cortex-Analyzer input.
+    argparser = argparse.ArgumentParser(description="""Create and verify Cortex-Responder input.
         Pass JSON-input via stdin for verification with specifying any argument.""")
-    argparser.add_argument("--dataType", "-t", required=True, help="Input data type")
-    argparser.add_argument("--data", "-v", required=True, help="Input data value")
+    argparser.add_argument("--dataType", "-t", required=True, help="Input data type (not implemented)")
+    argparser.add_argument("--data", "-v", required=True, help="Input data value (not implemented)")
     argparser.add_argument("--tlp", "-l", type=int, choices=range(0, 4), help="Input data TLP level")
     argparser.add_argument("--pap", "-a", type=int, choices=range(0, 4), help="Input data PAP level")
     argparser.add_argument("--config", "-c", nargs=2, action="append", help="Config key and value")
@@ -24,14 +24,7 @@ def setup_argparser():
     return argparser
 
 def build_inputdata(args):
-    data = args.get("data")
-    dataType = args.get("dataType")
-
-    # Handle special file data type
-    if dataType == "file":
-        args["file"] = data
-        args["filename"] = os.path.basename(data)
-        del args["data"]
+    # TODO: implement support for Responder data types
 
     # Purge missing arguments
     for k, v in tuple(args.items()):

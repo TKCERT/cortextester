@@ -1,17 +1,17 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from responder import CONFIG_SCHEMA
+from cortextester.analyzer.schema import CONFIG_SCHEMA
+from cortextester import pipe
 import jsonschema
 import texttable
 import functools
 import argparse
 import pprint
-import pipe
 import sys
 
 def setup_argparser():
-    argparser = argparse.ArgumentParser(description="""Render and verify Cortex-Responder config.
+    argparser = argparse.ArgumentParser(description="""Render and verify Cortex-Analyzer config.
         Pass JSON-config via stdin for verification.""")
     argparser.add_argument("--all", "-A", action="store_true", help="Show all aspects")
     argparser.add_argument("--meta", "-m", action="store_true", help="Show meta data")

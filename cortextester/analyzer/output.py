@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from responder import OUTPUT_SCHEMA
+from cortextester.analyzer.schema import OUTPUT_SCHEMA
+from cortextester import pipe
 import jsonschema
 import texttable
 import argparse
 import pprint
-import pipe
 import sys
 
 def setup_argparser():
-    argparser = argparse.ArgumentParser(description="""Render and verify Cortex-Responder output.
+    argparser = argparse.ArgumentParser(description="""Render and verify Cortex-Analyzer output.
         Pass JSON-output via stdin for verification.""")
     argparser.add_argument("--all", "-A", action="store_true", help="Show all aspects")
-    argparser.add_argument("--operations", "-o", action="store_true", help="Show requested operations")
+    argparser.add_argument("--artifacts", "-a", action="store_true", help="Show job artifacts")
+    argparser.add_argument("--taxonomies", "-t", action="store_true", help="Show job taxonomies")
     argparser.add_argument("--full", "-f", action="store_true", help="Show full job report")
     return argparser
 
@@ -24,15 +25,26 @@ def render_values(data):
     return data.values()
 
 def render_outputdata(data, args):
-    if args.get("all", False) or args.get("operations", False):
-        operations = data.get("operations", [])
-        if operations:
+    if args.get("all", False) or args.get("artifacts", False):
+        artifacts = data.get("artifacts", [])
+        if artifacts:
             table = texttable.Texttable()
-            table.header(render_header(operations[0]))
-            table.add_rows(list(map(render_values, operations)), header=False)
+            table.header(render_header(artifacts[0]))
+            table.add_rows(list(map(render_values, artifacts)), header=False)
             print(table.draw())
         else:
-            print("No operations available!")
+            print("No artifacts available!")
+
+    if args.get("all", False) or args.get("taxonomies", False):
+        summary = data.get("summary", {})
+        taxonomies = summary.get("taxonomies", [])
+        if taxonomies:
+            table = texttable.Texttable()
+            table.header(render_header(taxonomies[0]))
+            table.add_rows(list(map(render_values, taxonomies)), header=False)
+            print(table.draw())
+        else:
+            print("No taxonomies available!")
 
     if args.get("all", False) or args.get("full", False):
         full = data.get("full", {})
