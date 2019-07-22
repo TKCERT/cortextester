@@ -17,7 +17,8 @@ def setup_argparser():
         Pass JSON-input via stdin for verification with specifying any argument.""")
     argparser.add_argument("--dataType", "-t", required=True, help="Input data type",
                            choices=INPUT_SCHEMA["properties"]["dataType"]["enum"])
-    argparser.add_argument("--data", "-v", required=True, help="Input data value (not implemented)")
+    argparser.add_argument("--dataFile", "-f", required=True, help="Input data file",
+                           type=argparse.FileType("r"))
     argparser.add_argument("--tlp", "-l", type=int, choices=range(0, 4), help="Input data TLP level")
     argparser.add_argument("--pap", "-a", type=int, choices=range(0, 4), help="Input data PAP level")
     argparser.add_argument("--config", "-c", nargs=2, action="append", help="Config key and value")
@@ -25,7 +26,13 @@ def setup_argparser():
     return argparser
 
 def build_inputdata(args):
-    # TODO: implement support for Responder data types
+    dataFile = args.get("dataFile")
+    dataType = args.get("dataType")
+
+    # Handle special thehive data types
+    if dataType.startswith("thehive:"):
+        args["data"] = json.load(dataFile)
+        del args["dataFile"]
 
     # Purge missing arguments
     for k, v in tuple(args.items()):
