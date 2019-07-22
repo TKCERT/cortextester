@@ -13,8 +13,6 @@ INPUT_SCHEMA = {
                 "dataType": {
                     "description": "Input data type",
                     "type": "string",
-                    "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
-                             "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
                     "not": { "const": "file" }
                 },
                 "data": {
@@ -29,8 +27,6 @@ INPUT_SCHEMA = {
                 "dataType": {
                     "description": "Input data type",
                     "type": "string",
-                    "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
-                             "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
                     "const": "file"
                 },
                 "file": {
@@ -46,6 +42,12 @@ INPUT_SCHEMA = {
         }
     ],
     "properties": {
+        "dataType": {
+            "description": "Input data type",
+            "type": "string",
+            "enum": ["domain", "file", "filename", "fqdn", "hash", "ip", "mail", "mail_subject",
+                     "other", "regexp", "registry", "uri_path", "url", "user-agent", "username"],
+        },
         "tlp": {
             "description": "Input data TLP level",
             "type": "integer",
