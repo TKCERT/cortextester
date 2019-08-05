@@ -49,16 +49,14 @@ Validate the whole process including a Cortex-Analyzer:
 analyzer-input -t "domain" -v "thehive-project.org" | <your-cortex-analyzer> | analyzer-output
 ```
 
+Validate the whole process including a Cortex-Analyzer and its configuration file:
+```
+analyzer-input -t "domain" -v "thehive-project.org" -C <your-json-config-file> | <your-cortex-analyzer> | analyzer-output
+```
+
 For more information about the usage of the tools, see:
 ```
 analyzer-config --help
 analyzer-input --help
 analyzer-output --help
 ```
-
-## Roadmap
-
-Some ideas for the future development of cortextester:
-
-* Create and validate JSON-input for Responders.
-* Validate the JSON-output of Responders.
