@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from cortextester.analyzer.schema import INPUT_SCHEMA
+from cortextester.analyzer.schema import INPUT_SCHEMA, CONFIG_SCHEMA
+from cortextester.schema import schema_from_configuration_items
 from cortextester import pipe
 import jsonschema
 import argparse
@@ -22,6 +23,7 @@ def setup_argparser():
     argparser.add_argument("--pap", "-a", type=int, choices=range(0, 4), help="Input data PAP level")
     argparser.add_argument("--config", "-c", nargs=2, action="append", help="Config key and value")
     argparser.add_argument("--proxy", "-p", nargs=2, action="append", help="Proxy key and value")
+    argparser.add_argument("-C", help="Configuration file", type=argparse.FileType("r"))
     return argparser
 
 def build_inputdata(args):
@@ -58,6 +60,23 @@ def build_inputdata(args):
         config["proxy"] = proxy
     if config:
         args["config"] = config
+
+    # Handle configuration file defaults
+    if "C" in args:
+        configFile = json.load(args["C"])
+        jsonschema.validate(configFile, CONFIG_SCHEMA)
+        del args["C"]
+
+        config = configFile.get("config", dict())
+        if config:
+            if "config" in args:
+                config.update(args["config"])
+            args["config"] = config
+
+        configItems = configFile.get("configurationItems", list())
+        if configItems:
+            configSchema = schema_from_configuration_items(configItems)
+            jsonschema.validate(config, configSchema)
 
     return args
 
