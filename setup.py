@@ -42,6 +42,7 @@ setup(
         'cortextester.responder.input',
         'cortextester.responder.output',
         'cortextester.responder.schema',
+        'cortextester.schema',
     ],
     entry_points = {
         'console_scripts': [
