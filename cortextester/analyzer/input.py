@@ -2,8 +2,7 @@
 # encoding: utf-8
 
 from cortextester.analyzer.schema import INPUT_SCHEMA, CONFIG_SCHEMA
-from cortextester.schema import schema_from_configuration_items
-from cortextester import pipe
+from cortextester import pipe, schema
 import jsonschema
 import argparse
 import os.path
@@ -76,7 +75,14 @@ def build_inputdata(args):
 
         configItems = configFile.get("configurationItems", list())
         if configItems:
-            configSchema = schema_from_configuration_items(configItems)
+            defaults = schema.defaults_from_configuration_items(configItems)
+            if defaults:
+                config = defaults
+                if "config" in args:
+                    config.update(args["config"])
+                args["config"] = config
+
+            configSchema = schema.schema_from_configuration_items(configItems)
             jsonschema.validate(config, configSchema)
 
     return args

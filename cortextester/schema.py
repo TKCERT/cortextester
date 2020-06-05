@@ -26,3 +26,13 @@ def schema_from_configuration_items(configurationItems):
         "required": configRequired,
     }
     return configSchema
+
+def defaults_from_configuration_items(configurationItems):
+    defaults = dict()
+    for configItem in configurationItems:
+        if "defaultValue" in configItem:
+            configItemName = configItem.get("name")
+            configItemDefaultValue = configItem.get("defaultValue")
+            defaults[configItemName] = configItemDefaultValue
+
+    return defaults
