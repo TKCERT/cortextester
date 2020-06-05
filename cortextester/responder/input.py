@@ -67,8 +67,9 @@ def build_inputdata(args):
         jsonschema.validate(configFile, CONFIG_SCHEMA)
         del args["C"]
 
-        config = configFile.get("config", dict())
-        if config:
+        defaults = configFile.get("config", dict())
+        if defaults:
+            config = defaults
             if "config" in args:
                 config.update(args["config"])
             args["config"] = config
