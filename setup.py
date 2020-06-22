@@ -13,7 +13,7 @@ def read_file(filename):
 
 setup(
     name='cortextester',
-    version='0.0.1',
+    version='0.0.5',
     description='A set of Python tools for testing and validation of Cortex analyzers and responders',
     long_description=read_file('README.md'),
     long_description_content_type='text/markdown',
