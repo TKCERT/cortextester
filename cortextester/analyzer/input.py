@@ -83,7 +83,9 @@ def build_inputdata(args):
                 args["config"] = config
 
             configSchema = schema.schema_from_configuration_items(configItems)
+            config = schema.try_cast_configuration_items(config, configSchema)
             jsonschema.validate(config, configSchema)
+            args["config"] = config
 
     return args
 
